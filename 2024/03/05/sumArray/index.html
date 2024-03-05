@@ -1,0 +1,350 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>sumArray | Welcome To Lhr Blog</title><meta name="author" content="Liu Haoran"><meta name="copyright" content="Liu Haoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="CUDA向量加普通cpp向量加 void sumArrayOnHost(float* A,float* B,float* C,const int N) &#123;   for(int idx &#x3D; 0;idx &lt; N;idx++)   &#123;     C[idx] &#x3D; A[idx] + B[idx];   &#125; &#125;   时间复杂度为N，随着数据的增加，运行速度直线上升，但在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sumArray">
+<meta property="og:url" content="http://example.com/2024/03/05/sumArray/index.html">
+<meta property="og:site_name" content="Welcome To Lhr Blog">
+<meta property="og:description" content="CUDA向量加普通cpp向量加 void sumArrayOnHost(float* A,float* B,float* C,const int N) &#123;   for(int idx &#x3D; 0;idx &lt; N;idx++)   &#123;     C[idx] &#x3D; A[idx] + B[idx];   &#125; &#125;   时间复杂度为N，随着数据的增加，运行速度直线上升，但在">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2024-03-05T13:43:34.000Z">
+<meta property="article:modified_time" content="2024-03-05T17:13:49.241Z">
+<meta property="article:author" content="Liu Haoran">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/03/05/sumArray/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'sumArray',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-03-06 01:13:49'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Welcome To Lhr Blog"><span class="site-name">Welcome To Lhr Blog</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">sumArray</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-03-05T13:43:34.000Z" title="Created 2024-03-05 21:43:34">2024-03-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-03-05T17:13:49.241Z" title="Updated 2024-03-06 01:13:49">2024-03-06</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="sumArray"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="CUDA向量加"><a href="#CUDA向量加" class="headerlink" title="CUDA向量加"></a>CUDA向量加</h1><h2 id="普通cpp向量加"><a href="#普通cpp向量加" class="headerlink" title="普通cpp向量加"></a>普通cpp向量加</h2><pre>
+<code>void sumArrayOnHost(float* A,float* B,float* C,const int N)
+&#123;
+  for(int idx = 0;idx < N;idx++)
+  &#123;
+    C[idx] = A[idx] + B[idx];
+  &#125;
+&#125;
+</code>
+</pre>
+<p>时间复杂度为N，随着数据的增加，运行速度直线上升，但在N少的时候，因为没有CUDA那种复杂的异构之间的操作和线程操作，速度比比较快。</p>
+<h2 id="CUDA向量加-1"><a href="#CUDA向量加-1" class="headerlink" title="CUDA向量加"></a>CUDA向量加</h2><pre>
+<code>
+__global__ void sumArrayOnGPU(float* A,float* B,float* C,const int N)
+&#123;
+  int idx = blockIdx.x * blockDim.x + threadIdx.x;
+  for(idx < N)
+  &#123;
+    C[idx] = B[idx] + A[idx];
+  &#125;
+&#125;
+</code>
+</pre>
+<p>前面说过，一个grid里面有很多个block，block的编号就是blockIdx.x，而一个block里面的thread数量就是blockDim.x。而线程在整个grid里面的编号就是blockIdx.x * blockDim.x + threadIdx.x。对于这种简单复杂的运算，CUDA发挥了他的特性。</p>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><pre>
+<code>
+#include &lt;stdio.h>
+#include &ltcuda_runtime.h>
+// 该函数用来检测程序的正确性
+void checkResult(float *hostRef,float *gpuRef,const int N)
+&#123;
+  double epsilon = 1.0E-8;
+  bool match = 1;
+  for(int i = 0;i < N;i++)
+  &#123;
+    if(abs(hostRef[i] - gpuRef[i]) > epsilon)
+    &#123;
+      match = 0;
+      printf("Arrays do not match!\n);
+      printf("host %5.2f gpu %5.2f at current %d\n",hostRef[i],gpuRef[i],i);
+      break;
+    &#125;
+  &#125;
+  if(match)
+    printf("Arrays match.\n\n");
+  return;
+&#125;
+
+// 该函数用来初始化数组
+void initialData(float *ip,int size)
+&#123;
+  time_t t;
+  srand((unsigned)time(&t));
+  for (int i = 0;i < size;i++)
+  &#123;
+    ip[i] = (float)(rand()&0xFF)/10.0f;//获取一个0~25.5的浮点数
+  &#125;
+  return;
+&#125;
+
+//该函数为cpu上的串行算法
+void sumArraysOnHost(float *A,float *B,float *C,const int N)
+&#123;
+  for(int idx = 0;idx < N;idx++)
+  &#123;
+    C[idx] = A[idx] + B[idx];
+  &#125;
+&#125;
+
+//该函数为gpu上的核函数
+__global__ void sumArrayOnGPU(float *A,float *B,float *C,const int N)
+&#123;
+  int idx = blockIdx.x * blockDim.x + threadIdx.x;
+  if (idx < N)
+  &#123;
+    C[idx] = A[idx] + B[idx];
+  &#125;
+&#125;
+
+int main(int argc,char const *argv[])
+&#123;
+  printf("%s Starting...\n",argv[0]);
+
+  //获取gpu设备
+  int dev = 0;
+  cudaDeviceProp deviceProp;
+  cudaGetDeviceProperties(&deviceProp,dev);
+  printf("Using Device %d: %s\n",dev,deviceProp,name);
+  cudaSetDevice(dev);
+
+  //声明变量
+  int nElem = 1 << 24;
+  size_t nBytes = nElem * sizeof(float);
+  float *h_A,*h_B,*hostRef,*gpuRef;
+  h_A = (float *)malloc(nBytes);
+  h_B = (float *)malloc(nBytes);
+  hostRef = (float*)malloc(nBytes);
+  gpuRef = (float*)malloc(nBytes);
+
+  //定义threadperblock与blockperfrid
+  dim3 block(1024);
+  dim3 grid((nElem + block.x - 1) / block.x);
+
+  //使用cuda自带的计时工具
+  float elapsedTime;
+  cudaEvent_t star,stop;
+  //创建两个事件
+  cudaEventCreate(&start);
+  cudaEventCreate(&stop);
+
+  //初始化向量A,B
+  //记录start时间
+  cudaEventRecored(start,0);
+  initialData(h_A,nElem);
+  initialData(h_B,nElem);
+  //记录stop时间
+  cudaEventRecord(stop,0);
+  cudaEventSynchronize(stop);
+  //计算经过时间
+  cudaEventElapsedTime(&elapsedTime,start,stop);
+  printf("initialData Time elapsed %f milliseconds\n",elapsedTime);
+
+  //销毁事件
+  cudaEventDestroy(start);
+  cudaEventDestroy(stop);
+
+  // 将hostRef,gpuRef,
+  memset(hostRef,0,nBytes);
+  memeset(gpuRef,0,nBytes);
+
+  // cpu向量加
+  cudaEventRecord(start,0);
+  sumArrayOnHost(h_A,h_B,hostRef,nElem);
+  cudaEventRecord(stop,0);
+  cudaEventSynchronize(stop);
+  // 计算经过的时间
+  cudaEventElapsedTime(&elapsedTime,start,stop);
+  printf("sumArraysOnHost Time elapsed %f milliseconds\n", elapsedTime);
+
+  // 开辟gpu内存空间
+  float *d_A,*d_B,*d_C;
+  cudaMalloc((float**)&d_A,nBytes);
+  cudaMalloc((float**)&d_B,nBytes);
+  cudaMalloc((float**)&d_C,nBytes);
+
+  //将数据从cpu传送到gpu
+  cudaMemcpy(d_A,h_A,nBytes,cudaMemcpyHostToDevice);
+  cudaMemcpy(d_B,h_B,nBytes,cudaMemcpyHostToDevice);
+  cudaMemcpy(d_C,h_gpuRef,nBytes,cudaMemcpyHostToDevice);
+
+  //调用核函数
+  cudaEventRecord(start,0);
+  sumArrayOnGPU<<<grid,block>>>(d_A,d_B,d_C,nElem);
+  cudaDeviceSynchronize();
+  cudaEventRecord(stop,0);
+  cudaEventSynchronsize(stop);
+  //计算经过的时间
+  cudaEventElapsedTime(&elapsedTime,start,stop);
+  printf("sumArraysOnGPU <<< %d,%d >>> Time elapsed %f milliseconds\n",grid.x,block.x,elapsedTime);
+
+  // 将数据从gpu传送到cpu
+  cudaMemcpy(gpuRef, d_C, nBytes, cudaMemcpyDeviceToHost);
+
+  // 检查结果是否正确
+  checkResult(hostRef, gpuRef, nElem);
+
+  // 释放cpu空间
+  cudaFree(d_A);
+  cudaFree(d_B);
+  cudaFree(d_C);
+
+  cudaDeviceReset();
+
+  free(h_A);
+  free(h_B);
+  free(hostRef);
+  free(gpuRef);
+
+  // 销毁事件
+  cudaEventDestroy(start);
+  cudaEventDestroy(stop);
+
+  return 0;
+&#125;
+</code>
+</pre>
+<h3 id="程序分析"><a href="#程序分析" class="headerlink" title="程序分析"></a>程序分析</h3><ul>
+<li><strong>第一步，获取gpu设备，并且设置，可以省略</strong></li>
+<li><strong>第二步，声明cpu变量，分配空间，进行初始化</strong></li>
+<li><strong>第三步，开辟gpu内存空间，将数据从cpu传送到gpu</strong></li>
+<li><strong>第四步，调用核函数</strong></li>
+<li><strong>第五步，将数据从gpu传送到cpu</strong></li>
+<li><strong>第六步，销毁事件</strong></li>
+</ul>
+<h1 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h1><p>如图所示<br><img src="/images/CUDA.png" alt="Alt text"><br><img src="/images/CUDA1.png" alt="Alt text"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Liu Haoran</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2024/03/05/sumArray/">http://example.com/2024/03/05/sumArray/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/03/04/cuda/" title="CUDA"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">CUDA</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Liu Haoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">3</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CUDA%E5%90%91%E9%87%8F%E5%8A%A0"><span class="toc-number">1.</span> <span class="toc-text">CUDA向量加</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%99%AE%E9%80%9Acpp%E5%90%91%E9%87%8F%E5%8A%A0"><span class="toc-number">1.1.</span> <span class="toc-text">普通cpp向量加</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CUDA%E5%90%91%E9%87%8F%E5%8A%A0-1"><span class="toc-number">1.2.</span> <span class="toc-text">CUDA向量加</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.</span> <span class="toc-text">完整代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90"><span class="toc-number">1.3.1.</span> <span class="toc-text">程序分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">结果分析</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/05/sumArray/" title="sumArray">sumArray</a><time datetime="2024-03-05T13:43:34.000Z" title="Created 2024-03-05 21:43:34">2024-03-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/04/cuda/" title="CUDA">CUDA</a><time datetime="2024-03-04T08:04:28.000Z" title="Created 2024-03-04 16:04:28">2024-03-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/01/01/hello-hpc/" title="Hello HPC">Hello HPC</a><time datetime="2024-01-01T09:53:38.585Z" title="Created 2024-01-01 17:53:38">2024-01-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Liu Haoran</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
