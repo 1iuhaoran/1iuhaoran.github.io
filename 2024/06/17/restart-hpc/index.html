@@ -1,0 +1,414 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>restart hpc | Welcome To Lhr Blog</title><meta name="author" content="Liu Haoran"><meta name="copyright" content="Liu Haoran"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言距离上次写博客有快俩月了，距离上次更新hpc相关的内容也有快三个月了，这期间去自学了一点cs理论，干了很多不喜欢的活，考了两门考试。终于又有时间来重新整理blog。 hpc的入门根据深度学习的学习经验，我决定采用同样的方法来学习hpc。我认为任何一个技术的入门都是从跟着tutorials进行复刻开始的。这是第一步，帮我们熟悉大概的流程，下一步就是要跟着技术文档，去进行自己的diy了。完成这么个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="restart hpc">
+<meta property="og:url" content="http://example.com/2024/06/17/restart-hpc/index.html">
+<meta property="og:site_name" content="Welcome To Lhr Blog">
+<meta property="og:description" content="前言距离上次写博客有快俩月了，距离上次更新hpc相关的内容也有快三个月了，这期间去自学了一点cs理论，干了很多不喜欢的活，考了两门考试。终于又有时间来重新整理blog。 hpc的入门根据深度学习的学习经验，我决定采用同样的方法来学习hpc。我认为任何一个技术的入门都是从跟着tutorials进行复刻开始的。这是第一步，帮我们熟悉大概的流程，下一步就是要跟着技术文档，去进行自己的diy了。完成这么个">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2024-06-17T11:38:10.000Z">
+<meta property="article:modified_time" content="2024-06-18T05:29:12.713Z">
+<meta property="article:author" content="Liu Haoran">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/06/17/restart-hpc/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.12.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.0/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'restart hpc',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-06-18 13:29:12'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Welcome To Lhr Blog"><span class="site-name">Welcome To Lhr Blog</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">restart hpc</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-06-17T11:38:10.000Z" title="Created 2024-06-17 19:38:10">2024-06-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-06-18T05:29:12.713Z" title="Updated 2024-06-18 13:29:12">2024-06-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="restart hpc"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>距离上次写博客有快俩月了，距离上次更新hpc相关的内容也有快三个月了，这期间去自学了一点cs理论，干了很多不喜欢的活，考了两门考试。终于又有时间来重新整理blog。</p>
+<h1 id="hpc的入门"><a href="#hpc的入门" class="headerlink" title="hpc的入门"></a>hpc的入门</h1><p>根据深度学习的学习经验，我决定采用同样的方法来学习hpc。我认为任何一个技术的入门都是从跟着tutorials进行复刻开始的。这是第一步，帮我们熟悉大概的流程，下一步就是要跟着技术文档，去进行自己的diy了。完成这么个流程，比那可以说是入门了。</p>
+<h1 id="整理之前openmp与mpi的代码"><a href="#整理之前openmp与mpi的代码" class="headerlink" title="整理之前openmp与mpi的代码"></a>整理之前openmp与mpi的代码</h1><h2 id="openmp"><a href="#openmp" class="headerlink" title="openmp"></a>openmp</h2><p>openmp的入门相对比较友好，对于用过thread的人来讲，openmp不算新颖，没有难懂的概念。对于不了解多线程的人，大概也不了解进程，简单来讲，进程就是运行一个程序，线程就是这个程序的执行通道。如何把一个程序分成多个线程，openmp就提供了解决方案。只需要通过两条执行指令，在程序需要执行并行的模块前加入指导语句，在模块结束后填写终止语句。</p>
+<p><img src="/images/fork-join.png" alt="Alt text"></p>
+<h3 id="走进openmp"><a href="#走进openmp" class="headerlink" title="走进openmp"></a>走进openmp</h3><p>我们通过下面这个例子走进openmp。求和，通过更改n的值，就可以观察程序运行的结果，注意其时间。在数量级达到百万级，千万级的时候，程序就绷不住了。</p>
+<pre>
+<code>
+#include <stdio.h>
+#include <time.h>
+int main(int argc, char const *argv[])
+&#123;
+  clock_t start, end;
+  double cpu_time_used;
+  start = clock();
+  int n = 100;
+  long long int sum = 0;
+  int data[n];
+  for (int i = 0; i < n; i++)
+  &#123;
+    data[i] = i + 1;
+  &#125;
+
+  for (int i = 0; i < n; i++)
+  &#123;
+    sum += data[i];
+  &#125;
+  printf("sum = %lld\n", sum);
+  end = clock();
+  cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+  printf("Time taken: %f\n", cpu_time_used);
+  return 0;
+&#125;
+</code>
+</pre>
+
+
+<h2 id="第一个案例：openmp加速矩阵乘法"><a href="#第一个案例：openmp加速矩阵乘法" class="headerlink" title="第一个案例：openmp加速矩阵乘法"></a>第一个案例：openmp加速矩阵乘法</h2><pre>
+<code>
+#include <stdio.h>
+#include <stdlib.h>
+#include <omp.h>
+#define M 1000
+#define N 1000
+#define P 1000
+int main(int argc, char const *argv[])
+&#123;
+  //动态分配二维数组a,b,c
+  double **a = (double **)malloc(M * sizeof(double *));
+  double **b = (double **)malloc(N * sizeof(double *));
+  double **c = (double **)malloc(M * sizeof(double *));
+
+  for (int i = 0; i < M; i++)
+  &#123;
+    a[i] = (double *)malloc(N * sizeof(double));
+    c[i] = (double *)malloc(P * sizeof(double));
+  &#125;
+  for (int i = 0; i < N; i++)
+  &#123;
+    b[i] = (double *)malloc(P * sizeof(double));
+  &#125;
+  // 初始化a,b,c...
+  // 矩阵乘法 M*N  N*P  M*P
+  double start_time = omp_get_wtime();
+  #pragma omp parallel for collaspe(2)
+  for (int i = 0; i < M; i++)
+  &#123;
+    for (int j = 0;j < P; j++)
+    &#123;
+      c[i][j] = 0;
+      for (int k = 0;k < N; k++)
+      &#123;
+        c[i][j] += a[i][k] * b[k][j];
+      &#125;
+    &#125;
+  &#125;
+  double end_time = omp_get_wtime();
+  printf("运行时间: %f 秒\n", end_time - start_time);
+  // 释放分配的内存
+  for (int i = 0; i < M; i++)
+  &#123;
+    free(a[i]);
+    free(c[i]);
+  &#125;
+  for (int j = 0; j < N; j++)
+  &#123;
+    free(b[j]);
+  &#125;
+  free(a);
+  free(b);
+  free(c);
+
+  return 0;
+
+&#125;
+</code>
+</pre>
+
+<h2 id="opemmp的内置api"><a href="#opemmp的内置api" class="headerlink" title="opemmp的内置api"></a>opemmp的内置api</h2><pre>
+<code>
+#include <stdio.h>
+#include <omp.h>
+int main(int argc, char const *argv[])
+&#123;
+  int tid, ncpu;
+  double start_time, end_time;
+  start_time = omp_get_wtime();
+  tid = omp_get_thread_num();
+  ncpu = omp_get_num_threads();
+  printf("hello from thread %d in %d CPUs\n", tid, ncpu);
+  printf("\n");
+#pragma omp parallel num_threads(3) private(tid, ncpu)
+  &#123;
+    tid = omp_get_thread_num();
+    ncpu = omp_get_num_threads();
+    printf("hello from thread %d in %d CPUs\n", tid, ncpu);
+  &#125;
+  printf("\n");
+  printf("hello from thread %d in %d Cpus\n", tid, ncpu);
+  end_time = omp_get_wtime(); // 结束计时
+  // 输出运行时间
+  printf("运行时间: %f 秒\n", end_time - start_time);
+
+  return 0;
+&#125;
+
+</code>
+</pre>
+
+<h2 id="openmp的变量"><a href="#openmp的变量" class="headerlink" title="openmp的变量"></a>openmp的变量</h2><pre>
+<code>
+#include <stdio.h>
+#include <omp.h>
+int main(int argc, char const *argv[])
+&#123;
+  int i = 100;
+  float a = 111.11;
+  omp_set_num_threads(4);
+#pragma omp parallel firstprivate(i, a) // private,firstprivate,lastprivate
+  &#123;
+    i = i + 1;
+    a = a + 1;
+    printf("线程编号: %d, i 的值: %d, a 的值: %f\n", omp_get_thread_num(), i, a);
+  &#125;
+  printf("主线程中 i 的值: %d\n", i);
+  return 0;
+&#125;
+
+</code>
+</pre>
+<h2 id="openmp的规约"><a href="#openmp的规约" class="headerlink" title="openmp的规约"></a>openmp的规约</h2><pre>
+<code>
+#include <stdio.h>
+#include <omp.h>
+int main(int argc, char const *argv[])
+&#123;
+  long long int sum = 0;
+  int n = 10000000;
+  double start_time, end_time;
+  start_time = omp_get_wtime();
+  int data[100000];
+  // 初始化数组
+  for (int i = 0; i < n; i++)
+  &#123;
+    data[i] = i + 1;
+  &#125;
+#pragma omp parallel for reduction(+ : sum)
+  for (int i = 0; i < n; i++)
+  &#123;
+    sum += data[i];
+  &#125;
+  printf("%lld\n", sum);
+  end_time = omp_get_wtime(); // 结束计时
+  // 输出运行时间
+  printf("运行时间: %f 秒\n", end_time - start_time);
+  return 0;
+&#125;
+
+
+</code>
+</pre>
+
+<h2 id="openmp的sections"><a href="#openmp的sections" class="headerlink" title="openmp的sections"></a>openmp的sections</h2><pre>
+<code>
+#include <stdio.h>
+#include <omp.h>
+int main(int argc, char const *argv[])
+&#123;
+#pragma omp parallel sections
+  &#123;
+#pragma omp section
+    &#123;
+      printf("这是第一部分，线程ID:%d\n", omp_get_thread_num());
+    &#125;
+#pragma omp section
+    &#123;
+      printf("这是第二部分，线程ID:%d\n", omp_get_thread_num());
+    &#125;
+#pragma omp section
+    &#123;
+      printf("这是第三部分，线程ID:%d\n", omp_get_thread_num());
+    &#125;
+  &#125;
+  return 0;
+&#125;
+
+</code>
+</pre>
+
+<h2 id="single"><a href="#single" class="headerlink" title="single"></a>single</h2><pre>
+<code>
+#include <stdio.h>
+#include <omp.h>
+
+#define SIZE 10
+
+int main()
+&#123;
+  int shared_array[SIZE];
+
+#pragma omp parallel
+
+  &#123;
+// 使用 single 指令确保只有一个线程初始化数组
+#pragma omp single
+    &#123;
+      printf("线程 %d 开始初始化数组...\n", omp_get_thread_num());
+
+      // 初始化数组
+      for (int i = 0; i < SIZE; i++)
+      &#123;
+        shared_array[i] = i;
+      &#125;
+
+      printf("线程 %d 完成初始化数组。\n", omp_get_thread_num());
+      int num_threads = omp_get_num_threads();
+      printf("当前线程数量：%d\n", num_threads);
+    &#125;
+
+// 为了保证数组初始化完成后再进行输出，我们可以使用 barrier
+#pragma omp barrier
+
+// 使用互斥锁保护 printf 函数的调用
+#pragma omp critical
+    &#123;
+      printf("线程 %d 访问共享数组：", omp_get_thread_num());
+      for (int i = 0; i < SIZE; i++)
+      &#123;
+        printf("%d ", shared_array[i]);
+      &#125;
+      printf("\n");
+    &#125;
+  &#125;
+  return 0;
+&#125;
+
+</code>
+</pre>
+
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>为了避免只知其然，不知其所以然，应该去学openmp的语法，以及openmp的api，以及openmp的编程技巧。但也要考虑到在开发过程中，80%的代码只会用到20%的语法，要平衡知识的获取与实践能力的培养。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">Liu Haoran</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2024/06/17/restart-hpc/">http://example.com/2024/06/17/restart-hpc/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/04/19/NJUCS_CPL/" title="NJUCS_CPL"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">NJUCS_CPL</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Liu Haoran</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">11</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hpc%E7%9A%84%E5%85%A5%E9%97%A8"><span class="toc-number">2.</span> <span class="toc-text">hpc的入门</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B4%E7%90%86%E4%B9%8B%E5%89%8Dopenmp%E4%B8%8Empi%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">整理之前openmp与mpi的代码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#openmp"><span class="toc-number">3.1.</span> <span class="toc-text">openmp</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B5%B0%E8%BF%9Bopenmp"><span class="toc-number">3.1.1.</span> <span class="toc-text">走进openmp</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%A1%88%E4%BE%8B%EF%BC%9Aopenmp%E5%8A%A0%E9%80%9F%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95"><span class="toc-number">3.2.</span> <span class="toc-text">第一个案例：openmp加速矩阵乘法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#opemmp%E7%9A%84%E5%86%85%E7%BD%AEapi"><span class="toc-number">3.3.</span> <span class="toc-text">opemmp的内置api</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#openmp%E7%9A%84%E5%8F%98%E9%87%8F"><span class="toc-number">3.4.</span> <span class="toc-text">openmp的变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#openmp%E7%9A%84%E8%A7%84%E7%BA%A6"><span class="toc-number">3.5.</span> <span class="toc-text">openmp的规约</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#openmp%E7%9A%84sections"><span class="toc-number">3.6.</span> <span class="toc-text">openmp的sections</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#single"><span class="toc-number">3.7.</span> <span class="toc-text">single</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E5%90%8E"><span class="toc-number">4.</span> <span class="toc-text">最后</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/17/restart-hpc/" title="restart hpc">restart hpc</a><time datetime="2024-06-17T11:38:10.000Z" title="Created 2024-06-17 19:38:10">2024-06-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/19/NJUCS_CPL/" title="NJUCS_CPL">NJUCS_CPL</a><time datetime="2024-04-19T11:53:35.000Z" title="Created 2024-04-19 19:53:35">2024-04-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/23/jetson%E9%85%8D%E7%BD%AEopencv/" title="jetson配置opencv">jetson配置opencv</a><time datetime="2024-03-23T02:47:05.000Z" title="Created 2024-03-23 10:47:05">2024-03-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/20/cuda2/" title="cuda2">cuda2</a><time datetime="2024-03-20T12:54:13.000Z" title="Created 2024-03-20 20:54:13">2024-03-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/13/matlab%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" title="matlab基本使用">matlab基本使用</a><time datetime="2024-03-13T13:40:04.000Z" title="Created 2024-03-13 21:40:04">2024-03-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Liu Haoran</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.12.0"></script><script src="/js/main.js?v=4.12.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.32/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
